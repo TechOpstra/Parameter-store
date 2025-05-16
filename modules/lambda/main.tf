@@ -51,11 +51,6 @@ variable "parameter_arn" {
   type        = string
 }
 
-variable "sns_topic_arn" {
-  description = "ARN of the SNS Topic"
-  type        = string
-}
-
 output "lambda_arn" {
   description = "ARN of the Lambda function"
   value       = aws_lambda_function.fetch_parameter.arn
