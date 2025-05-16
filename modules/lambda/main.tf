@@ -3,7 +3,8 @@ resource "aws_lambda_function" "fetch_parameter" {
   runtime       = "python3.10"
   handler       = "function.lambda_handler"
   role          = aws_iam_role.lambda_role.arn
-  filename      = "./function.zip"  # This contains your Lambda code
+  filename      = "function.zip"  # This contains your Lambda code
+  source_code_hash = filebase64sha256("function.zip")
 }
 
 resource "aws_iam_role" "lambda_role" {
