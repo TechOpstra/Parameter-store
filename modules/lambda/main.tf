@@ -61,7 +61,3 @@ variable "kms_key_arn" {
   type        = string
 }
 
-output "kms_key_arn" {
-  description = "ARN of the KMS key used for encrypting Parameter Store values"
-  value       = aws_kms_key.app_key.arn  # Ensure this references your actual KMS key resource
-}
