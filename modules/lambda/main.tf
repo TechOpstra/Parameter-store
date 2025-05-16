@@ -23,14 +23,22 @@ resource "aws_iam_policy" "lambda_ssm_access" {
   name = "LambdaSSMAccessPolicy"
 
   policy = jsonencode({
-    Version   = "2012-10-17",  # ✅ Required for valid IAM policies
-    Statement = [{
-      Effect   = "Allow"
-      Action   = ["ssm:GetParameter"]
-      Resource = var.parameter_arn
-    }]
+    Version   = "2012-10-17",
+    Statement = [
+      {
+        Effect   = "Allow"
+        Action   = ["ssm:GetParameter"]
+        Resource = var.parameter_arn
+      },
+      {
+        Effect   = "Allow"
+        Action   = ["kms:Decrypt"]
+        Resource = var.kms_key_arn  # 🔹 Reference KMS key ARN
+      }
+    ]
   })
 }
+
 
 resource "aws_iam_role_policy_attachment" "lambda_ssm_attach" {
   role       = aws_iam_role.lambda_role.name
@@ -51,4 +59,9 @@ variable "sns_topic_arn" {
 output "lambda_arn" {
   description = "ARN of the Lambda function"
   value       = aws_lambda_function.fetch_parameter.arn
+}
+
+variable "kms_key_arn" {
+  description = "ARN of the KMS key used to encrypt Parameter Store values"
+  type        = string
 }
