@@ -22,14 +22,11 @@ resource "aws_iam_policy" "lambda_ssm_access" {
   name = "LambdaSSMAccessPolicy"
 
   policy = jsonencode({
+    Version   = "2012-10-17",  # ✅ Required for valid IAM policies
     Statement = [{
       Effect   = "Allow"
       Action   = ["ssm:GetParameter"]
       Resource = var.parameter_arn
-    },{
-      Effect   = "Allow"
-      Action   = ["sns:Publish"]
-      Resource = var.sns_topic_arn
     }]
   })
 }
@@ -38,6 +35,7 @@ resource "aws_iam_role_policy_attachment" "lambda_ssm_attach" {
   role       = aws_iam_role.lambda_role.name
   policy_arn = aws_iam_policy.lambda_ssm_access.arn
 }
+
 
 variable "parameter_arn" {
   description = "ARN of the Parameter Store"
