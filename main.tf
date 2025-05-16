@@ -16,7 +16,7 @@ module "eventbridge" {
 # SNS Module: Sends notifications upon updates
 module "sns" {
   source     = "./modules/sns"
-  user_email = "sbvh1437@gmail.com"  # Change to recipient's email
+  user_email = "htemper2@gmail.com"  # Change to recipient's email
 }
 
 # Lambda Module: Fetches Parameter Store values & publishes to SNS
