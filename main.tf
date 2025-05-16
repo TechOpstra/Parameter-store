@@ -21,8 +21,9 @@ module "sns" {
 
 # Lambda Module: Fetches Parameter Store values & publishes to SNS
 module "lambda" {
-  source         = "./modules/lambda"
-  parameter_arn  = module.parameter_store.parameter_arn
-  sns_topic_arn  = module.sns.sns_topic_arn
+  source        = "./modules/lambda"
+  parameter_arn = module.parameter_store.parameter_arn
+  kms_key_arn   = module.parameter_store.kms_key_arn  # Ensure KMS ARN is passed
 }
+
 
