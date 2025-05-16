@@ -24,3 +24,9 @@ variable "parameter_value" {
   description = "Value stored in Parameter Store (encrypted)"
   type        = string
 }
+
+output "kms_key_arn" {
+  description = "ARN of the KMS key used for encrypting Parameter Store values"
+  value       = aws_kms_key.app_key.arn  # Ensure this references the actual KMS key resource in Parameter Store
+}
+
