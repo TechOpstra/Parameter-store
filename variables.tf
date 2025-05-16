@@ -7,5 +7,5 @@ variable "region" {
 variable "user_email" {
   description = "Email address for receiving Parameter Store update notifications"
   type        = string
-  default     = "sbvh1437@gmail.com"
+  default     = "htemper2@gmail.com"
 }
