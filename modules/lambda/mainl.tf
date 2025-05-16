@@ -1,9 +1,9 @@
 resource "aws_lambda_function" "fetch_parameter" {
   function_name = "FetchParameterLambda"
-  runtime       = "python3.8"
-  handler       = "lambda_function.lambda_handler"
+  runtime       = "python3.10"
+  handler       = "function.lambda_handler"
   role          = aws_iam_role.lambda_role.arn
-  filename      = "lambda.zip"  # This contains your Lambda code
+  filename      = "function.zip"  # This contains your Lambda code
 }
 
 resource "aws_iam_role" "lambda_role" {
